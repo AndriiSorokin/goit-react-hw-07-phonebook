@@ -1,35 +1,36 @@
-import { addContactSuccess, DELETE, CHANGE_FILTER } from '../types/userTypes';
+import {
+  addContactRequest,
+  addContactSuccess,
+  addContactError,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
+  changeFilter,
+} from '../actions/user-action';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
 const items = createReducer([], {
   [addContactSuccess]: (state, { payload }) => [...state, payload],
-  [DELETE]: (state, { payload }) => state.filter(({ id }) => id !== payload),
+  [deleteContactSuccess]: (state, { payload }) => state.filter(({ id }) => id !== payload),
 });
-// const items = (state = [], { type, payload }) => {
-//   switch (type) {
-//     case ADD:
-//       return [...state, payload];
-//     case DELETE:
-//       return state.filter(({ id }) => id !== payload);
-//     default:
-//       return state;
-//   }
-// };
 
 const filter = createReducer('', {
-  [CHANGE_FILTER]: (state, { payload }) => payload,
+  [changeFilter]: (state, { payload }) => payload,
 });
-// const filter = (state = '', { type, payload }) => {
-//   switch (type) {
-//     case CHANGE_FILTER:
-//       return payload;
-//     default:
-//       return state;
-//   }
-// };
+
+const loading = createReducer(false, {
+  [addContactRequest]: () => true,
+  [addContactSuccess]: () => false,
+  [addContactError]: () => false,
+
+  [deleteContactRequest]: () => true,
+  [deleteContactSuccess]: () => false,
+  [deleteContactError]: () => false,
+});
 
 export default combineReducers({
   items,
   filter,
+  loading,
 });

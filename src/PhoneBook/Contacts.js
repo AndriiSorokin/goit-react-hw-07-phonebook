@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteUser } from '../redux/actions/user-action';
+import { deleteContact } from '../redux/contactOperations/contactOperations';
 import style from '../PhoneBook/PhoneBook.module.css';
 
-const Contacts = ({ contacts, deleteContact }) => {
+const Contacts = ({ contacts, deleteNumber }) => {
+  console.log(contacts);
   return (
     <div>
       <ul>
         {contacts.map(contact => (
-          <li key={contact.id}>
+          <li key={contacts.id}>
             <span>
               {contact.name} : {contact.phone}
             </span>
             <button
               className={style.btnDelete}
-              onClick={() => deleteContact(contact.id)}
+              onClick={() => deleteNumber(contact.id)}
               type="button"
             >
               delete
@@ -29,7 +30,7 @@ const Contacts = ({ contacts, deleteContact }) => {
 
 Contacts.propTypes = {
   contacts: PropTypes.array.isRequired,
-  deleteContact: PropTypes.func.isRequired,
+  deleteNumber: PropTypes.func.isRequired,
 };
 
 const getVisibleUser = (contacts, filter) => {
@@ -42,6 +43,6 @@ const mapStatetoProps = ({ contacts: { items, filter } }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteContact: id => dispatch(deleteUser(id)),
+  deleteNumber: id => dispatch(deleteContact(id)),
 });
 export default connect(mapStatetoProps, mapDispatchToProps)(Contacts);

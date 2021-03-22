@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToList } from '../redux/actions/user-action';
+import { addToList } from '../redux/contactOperations/contactOperations';
 import style from '../PhoneBook/PhoneBook.module.css';
 
 class Form extends Component {

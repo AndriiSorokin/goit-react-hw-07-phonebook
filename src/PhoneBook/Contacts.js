@@ -10,7 +10,7 @@ const Contacts = ({ contacts, deleteNumber }) => {
     <div>
       <ul>
         {contacts.map(contact => (
-          <li key={contacts.id}>
+          <li key={contact.id}>
             <span>
               {contact.name} : {contact.phone}
             </span>

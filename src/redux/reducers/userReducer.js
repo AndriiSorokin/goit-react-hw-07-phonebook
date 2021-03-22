@@ -5,12 +5,16 @@ import {
   deleteContactRequest,
   deleteContactSuccess,
   deleteContactError,
+  fetchContactRequest,
+  fetchContactSuccess,
+  fetchContactError,
   changeFilter,
 } from '../actions/user-action';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
 const items = createReducer([], {
+  [fetchContactSuccess]: (state, { payload }) => payload,
   [addContactSuccess]: (state, { payload }) => [...state, payload],
   [deleteContactSuccess]: (state, { payload }) => state.filter(({ id }) => id !== payload),
 });

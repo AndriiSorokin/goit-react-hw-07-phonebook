@@ -20,7 +20,7 @@ class PhoneBook extends Component {
       <div className={style.container}>
         <h1>PhoneBook</h1>
         <Form />
-        {contact.contact.length > 2 ? <Filter /> : ''}
+        {contact.contact.length > 2 && <Filter />}
         <Contacts />
       </div>
     );

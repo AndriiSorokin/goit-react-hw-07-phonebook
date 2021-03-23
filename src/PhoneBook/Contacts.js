@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteContact } from '../redux/contactOperations/contactOperations';
+import contactSelector from '../redux/contactSelector/contactSelector';
 import style from '../PhoneBook/PhoneBook.module.css';
 
 const Contacts = ({ contacts, deleteNumber }) => {
@@ -29,17 +30,18 @@ const Contacts = ({ contacts, deleteNumber }) => {
 };
 
 Contacts.propTypes = {
-  contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   deleteNumber: PropTypes.func.isRequired,
 };
 
-const getVisibleUser = (contacts, filter) => {
-  const normalizeFilter = filter.toLowerCase();
-  return contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter));
-};
-
-const mapStatetoProps = ({ contacts: { items, filter } }) => ({
-  contacts: getVisibleUser(items, filter),
+const mapStatetoProps = state => ({
+  contacts: contactSelector.getVisibleUser(state),
 });
 
 const mapDispatchToProps = dispatch => ({

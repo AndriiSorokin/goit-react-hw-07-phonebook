@@ -14,13 +14,13 @@ import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
 const items = createReducer([], {
-  [fetchContactSuccess]: (state, { payload }) => payload,
+  [fetchContactSuccess]: (_, { payload }) => payload,
   [addContactSuccess]: (state, { payload }) => [...state, payload],
   [deleteContactSuccess]: (state, { payload }) => state.filter(({ id }) => id !== payload),
 });
 
 const filter = createReducer('', {
-  [changeFilter]: (state, { payload }) => payload,
+  [changeFilter]: (_, { payload }) => payload,
 });
 
 const loading = createReducer(false, {
@@ -31,6 +31,10 @@ const loading = createReducer(false, {
   [deleteContactRequest]: () => true,
   [deleteContactSuccess]: () => false,
   [deleteContactError]: () => false,
+
+  [fetchContactRequest]: () => true,
+  [fetchContactSuccess]: () => false,
+  [fetchContactError]: () => false,
 });
 
 export default combineReducers({

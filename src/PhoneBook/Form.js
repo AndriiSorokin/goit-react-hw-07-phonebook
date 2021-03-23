@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToList } from '../redux/contactOperations/contactOperations';
+import contactSelector from '../redux/contactSelector/contactSelector';
 import style from '../PhoneBook/PhoneBook.module.css';
 
 class Form extends Component {
@@ -65,7 +66,7 @@ class Form extends Component {
 }
 
 const mapStatetoProps = state => ({
-  contacts: state.contacts.items,
+  contacts: contactSelector.getVisibleUser(state),
 });
 
 const mapDispatchToProps = dispatch => ({
